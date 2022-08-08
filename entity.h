@@ -16,6 +16,7 @@ const int MAX_LENGTH_TEN = 20;
 
 using namespace std;
 
+//======================= MAY BAY =======================
 struct MayBay
 {
     char sohieu_maybay[MAX_LENGTH_SHMB+1]; 
@@ -35,6 +36,36 @@ MayBay* Init_MB(MayBay mb){
     *temp = mb;
     return temp;
 }
+
+bool listMBEmpty(List_MayBay list){
+    return list.soluong==0;
+}
+
+bool listMBFull(List_MayBay list){
+    return list.soluong>=MAXLIST_MAYBAY;
+}
+
+void Add_MB_to_List(List_MayBay &list,MayBay mb){
+    if(listMBFull(list)) return;
+    list.nodes[list.soluong] = Init_MB(mb);
+    list.soluong++;
+}
+int timkiem_MB(List_MayBay l, char* sohieuMB){
+	for(int i=0;i<l.soluong;i++)
+		if(strcmp(l.nodes[i]->sohieu_maybay, sohieuMB)==0)	return i;
+	return -1;
+}
+
+void xoa_mb_khoids(List_MayBay &dsmb , int vitri){
+	delete dsmb.nodes[vitri];
+	for(int i=vitri; i< dsmb.soluong -1; i++ )
+		dsmb.nodes[i]= dsmb.nodes[i+1];
+	dsmb.soluong--;
+}
+void edit_mb(List_MayBay &dsmb , int vitri, MayBay &mb){
+	    *dsmb.nodes[vitri]=  mb ;
+}
+//==================== MAY BAY =================== }
 
 struct ChuyenBay
 {
@@ -71,11 +102,7 @@ struct NodeHanhKhach
 
 typedef NodeHanhKhach* PTR_HK;
 
-int timkiem_MB(List_MayBay l, char* sohieuMB){
-	for(int i=0;i<l.soluong;i++)
-		if(strcmp(l.nodes[i]->sohieu_maybay, sohieuMB)==0)	return i;
-	return -1;
-}
+
 
 void Init_CB(List_MayBay &l, ChuyenBay &a){
 	a.trangthai = CONVE;
@@ -92,7 +119,9 @@ PTR_ChuyenBay Init_Node_CB(ChuyenBay cb){
     temp->next = NULL;
     return temp;
 }
-
+bool listCBEmpty(PTR_ChuyenBay list){
+	return list==NULL;
+}
 PTR_HK Init_HK(HanhKhach hk){
     NodeHanhKhach *temp = new NodeHanhKhach;
     temp->info = hk;
@@ -125,23 +154,7 @@ void Add_CB_to_List(PTR_ChuyenBay &First, ChuyenBay cb){
     }
 }
 
-bool listCBEmpty(PTR_ChuyenBay list){
-	return list==NULL;
-}
 
-bool listMBEmpty(List_MayBay list){
-    return list.soluong==0;
-}
-
-bool listMBFull(List_MayBay list){
-    return list.soluong>=MAXLIST_MAYBAY;
-}
-
-void Add_MB_to_List(List_MayBay &list,MayBay mb){
-    if(listMBFull(list)) return;
-    list.nodes[list.soluong] = Init_MB(mb);
-    list.soluong++;
-}
 
 int checkFull_CB(PTR_ChuyenBay First){
 	for(int i=1;i<=First->data.soVe;i++){
