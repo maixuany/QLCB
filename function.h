@@ -21,8 +21,8 @@ int dem_CB(PTR_ChuyenBay list, string status);
 PTR_ChuyenBay hanhkhach_chuahoanthanhchuyenbay(PTR_ChuyenBay list_CB, char *CMND);
 PTR_ChuyenBay check_maCB_chuabay(PTR_ChuyenBay list_CB, char *maCB);
 void show_List_CB(PTR_ChuyenBay l, int page_now, int count_CB, string status);
-int DatVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK);
-int HuyVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK);
+int DatVe(PTR_ChuyenBay &First_CB, PTR_HK &root_HK);
+int HuyVe(PTR_ChuyenBay &First_CB, PTR_HK &root_HK);
 void Init_Main(List_MayBay &list_MB, PTR_ChuyenBay &First_CB, PTR_HK &root_HK);
 void Handle_Main();
 void deleteListCB(PTR_ChuyenBay &First);
@@ -33,7 +33,7 @@ bool check_new_MACB(PTR_ChuyenBay First, char *maCB);
 
 bool check_exist_SHMB(List_MayBay list, char *SHMB);
 bool check_SHMB_for_newCB(PTR_ChuyenBay First, List_MayBay listMB, char *SHMB);
-void NhapChuyenBay(PTR_ChuyenBay First, List_MayBay list);
+void NhapChuyenBay(PTR_ChuyenBay &First, List_MayBay list);
 void XuLyCB(PTR_ChuyenBay &p, PTR_HK root);
 void XuLyDSChuyenBay(PTR_ChuyenBay &First_CB, PTR_HK root, List_MayBay list);
 
@@ -141,7 +141,7 @@ PTR_ChuyenBay check_maCB_chuabay(PTR_ChuyenBay list_CB, char *maCB)
 	return NULL;
 }
 
-int DatVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK)
+int DatVe(PTR_ChuyenBay &First_CB, PTR_HK &root_HK)
 {
 	Clear_Frame_Main();
 	bool is_add_HK = true;
@@ -493,7 +493,7 @@ int DatVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK)
 					strcpy(newHK.CMND, CMND);
 					strcpy(newHK.ho, ho);
 					strcpy(newHK.ten, ten);
-					if (strcpy(phai, "NAM") == 0)
+					if (strcmp(phai, "NAM") == 0)
 						newHK.phai = 1;
 					else
 						newHK.phai = 0;
@@ -552,7 +552,7 @@ int DatVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK)
 	}
 }
 
-int HuyVe(PTR_ChuyenBay &First_CB, PTR_HK root_HK)
+int HuyVe(PTR_ChuyenBay &First_CB, PTR_HK &root_HK)
 {
 	Clear_Frame_Main();
 	int page_now = 1;
@@ -901,7 +901,7 @@ bool check_SHMB_for_newCB(PTR_ChuyenBay First, List_MayBay listMB, char *SHMB)
 	return true;
 }
 
-void NhapChuyenBay(PTR_ChuyenBay First, List_MayBay list)
+void NhapChuyenBay(PTR_ChuyenBay &First, List_MayBay list)
 {
 	int page_now = 1;
 	int count_CB = dem_CB(First, TATCA);
@@ -1306,7 +1306,7 @@ void XuLyDSChuyenBay(PTR_ChuyenBay &First_CB, PTR_HK root, List_MayBay list)
 		{
 			NhapChuyenBay(First_CB, list);
 			page_now = 1;
-			count_CB += 1;
+			count_CB  = dem_CB(First_CB, TATCA);
 			count_page = (count_CB % 10 == 0) ? (count_CB / 10) : (count_CB / 10 + 1);
 			show_List_CB(First_CB, page_now, count_CB, TATCA);
 			outtextxy(125, 6, MaCB);
@@ -1607,7 +1607,6 @@ void XuLyMB(List_MayBay &list, int vitri)
 					}
 					else
 					{
-						// Hàm Xóa
 						if (!xoa_mb_khoids(list, vitri))
 							Show_Message("ERROR", "XOA THAT BAI");
 						else
@@ -2200,7 +2199,7 @@ void SapXepDanhSachMayBayQuickSort(List_MayBay &list_MB, int vitri_dstk[], int q
 			j--;
 		}
 
-	} while (i <= j);
+	} while (i < j);
 
 	if (q < j)
 		SapXepDanhSachMayBayQuickSort(list_MB, vitri_dstk, q, j);
