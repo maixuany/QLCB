@@ -28,29 +28,8 @@ int main()
         }
         case 0:
         {
-            int key_2_1;
-            while (exit == 0)
-            {
-                key_2_1 = SelectLV2_1();
-                switch (key_2_1)
-                {
-                case -1:
-                {
-                    exit = 1;
-                    break;
-                }
-                case 0:
-                {
-                    QuanLyMayBay(list_MB);
-                    break;
-                }
-                case 1:
-                {
-                    // Chua Co Chuc Nang
-                    break;
-                }
-                }
-            }
+            QuanLyMayBay(list_MB);
+            break;
         case 1:
         {
             int key_2_2;

@@ -10,7 +10,6 @@ using namespace std;
 
 //Menu
 int SelectLV1();
-int SelectLV2_1();
 int SelectLV2_2();
 
 //Y
@@ -1476,47 +1475,6 @@ int SelectLV1()
 				Draw_Button(listMenu[key], 40, 15, 7);
 				++key;
 				Draw_Button(listMenu[key], 40, 15 + key * 4, 6);
-				continue;
-			}
-			else
-				continue;
-		}
-	}
-	return key;
-}
-
-int SelectLV2_1()
-{
-	Clear_Frame_Main();
-	Clear_Frame_Input();
-	string listMenu_1[1] = {"DANH SACH MAY BAY"};
-	for (int i = 0; i < 1; i++)
-		Draw_Button(listMenu_1[i], 40, 15 + i * 4, 7);
-	int key = 0;
-	Draw_Button(listMenu_1[0], 40, 15, 6);
-	char input;
-	while (1)
-	{
-		input = getch();
-		if (input == ENTER)
-			break;
-		if (input == ESC)
-			return -1;
-		if (input == is_press_arrow_key)
-		{
-			input = getch();
-			if (input == UP && key != 0)
-			{
-				Draw_Button(listMenu_1[key], 40, 15 + 4 * key, 7);
-				--key;
-				Draw_Button(listMenu_1[key], 40, 15 + 4 * key, 6);
-				continue;
-			}
-			else if (input == DOWN && key != 0)
-			{
-				Draw_Button(listMenu_1[key], 40, 15 + 4 * key, 7);
-				++key;
-				Draw_Button(listMenu_1[key], 40, 15 + 4 * key, 6);
 				continue;
 			}
 			else
