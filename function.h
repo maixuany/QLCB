@@ -89,7 +89,7 @@ void show_List_CB(PTR_ChuyenBay l, int page_now, int count_CB, string status)
 	}
 	if (count_CB == 0)
 	{
-		outtextxy(30, 11, "KHONG CO CHUYEN BAY NAO CHUA HOAN THANH");
+		outtextxy(30, 11, "KHONG CO CHUYEN BAY NAO");
 		ShowCur(false);
 		delete[] temp;
 		return;
