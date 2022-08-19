@@ -1447,6 +1447,8 @@ void After_Main(List_MayBay &list_MB, PTR_ChuyenBay &First_CB, PTR_HK &root_HK)
 
 int SelectLV1()
 {
+	Clear_Frame_Main();
+	Clear_Frame_Input();
 	string listMenu[2] = {" QUAN LY MAY BAY  ", "QUAN LY CHUYEN BAY"};
 	for (int i = 0; i < 2; i++)
 		Draw_Button(listMenu[i], 40, 15 + i * 4, 7);
